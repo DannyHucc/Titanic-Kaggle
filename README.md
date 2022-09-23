@@ -1,10 +1,10 @@
 # 鐵達尼號(Titanic)生存率預測
 
 ## 壹、簡介
+
 ### 一、項目背景：
 #### 泰坦尼克號的沉沒是歷史上最著名的沉船事件之一。 1912 年 4 月 15 日，鐵達尼號在與冰山相撞後沉沒。不幸的是，船上的每個人都沒有足夠的救生艇，導致 2224 名乘客和船員中有 1502 人死亡。
 #### 雖然生存中涉及到一些運氣因素，但似乎有些人比其他人更有可能生存。
-
 ### 二、目的：
 #### 使用機器學習創建一個模型，預測什麼樣的人更有可能在鐵達尼號沉船中生存下來。
 
@@ -14,8 +14,6 @@
 #### train.csv： 訓練數據集，用於模型的構建
 #### test.csv ：測試數據集，無生存信息
 #### gender_submission.csv ：提交的結果文件示例
-
------
 
 ### 四、 數據說明：
 #### 數據內容：
@@ -102,11 +100,11 @@
 -----
 
 ### 八、Fare(票價)缺失值處理：
-#### 使用sns.barplot()查看Pclass(船艙)和Emnarked(登船地)與Fare(票價)的關係。
-
+#### 使用sns.barplot()查看Pclass(船艙)和Embarked(登船地)與Fare(票價)的關係。
+![](image/8.png)
 #### Pclass(船艙)的頭等艙與Fare(票價)最有關係 - (圖8)
-
-#### Emnarked(登船地)’S’與Fare(票價)最有關係 - (圖9)
+![](image/9.png)
+#### Embarked(登船地)’S’與Fare(票價)最有關係 - (圖9)
 #### 將Pclass(船艙)為'1'且Embarked(登船地)為'S'的Fare(船票)的資料的平均值，填補到Fare(船票)的缺失值資料裡。
 
 -----
@@ -119,22 +117,7 @@
 -----
 
 ### 十、Name(姓氏)資料處理：
-#### 新增’Title’欄位，使用.split()將名字分割為姓氏，並使用.map()依姓氏的相關意思進行分類。
-| 	分類	 | 	姓氏	 |
-| 	--------	 | 	--------	 |
-| 	Mr	 | 	Mr	 |
-| 	Miss	 | 	Mlle, Miss	 |
-| 	Master	 | 	Master, Jonkheer	 |
-| 	Mrs	 | 	Mme, Ms, Mrs	 |
-| 	Royalty	 | 	Don, the Countess, Dona, Lady,Sir	 |
-| 	Officer	 | 	Capt, Col, Major, Dr, Rev	 |
-| 	Parch	 | 	父母/小孩人數	 |
-| 	SibSp	 | 	兄弟姐妹/配偶人數	 |
-| 	Ticket	 | 	船票編號	 |
-| 	Fare	 | 	票價	 |
-| 	Cabin	 | 	船艙號	 |
-| 	Embarked	 | 	登船地(C = Cherbourg, Q = Queenstown, S = Southampton)	 |
-
+#### 使用.split()將名字分割為姓氏，並使用.map()依照姓氏的相關意思進行分類，新增 title 欄位，將相同姓氏做資料合併。
 姓氏的相關意思：
 | 	姓氏	 | 	意思	 |
 | 	--------	 | 	--------	 |
@@ -156,3 +139,19 @@
 | 	Major	 | 	有少校人意思	 |
 | 	Dr.	 | 	Doctor,醫生/博士	 |
 | 	Rev.	 | 	Reverend,用於基督教的牧師	 |
+
+分類：
+| 	分類	 | 	姓氏	 |
+| 	--------	 | 	--------	 |
+| 	Mr	 | 	Mr	 |
+| 	Miss	 | 	Mlle, Miss	 |
+| 	Master	 | 	Master, Jonkheer	 |
+| 	Mrs	 | 	Mme, Ms, Mrs	 |
+| 	Royalty	 | 	Don, the Countess, Dona, Lady,Sir	 |
+| 	Officer	 | 	Capt, Col, Major, Dr, Rev	 |
+| 	Parch	 | 	父母/小孩人數	 |
+| 	SibSp	 | 	兄弟姐妹/配偶人數	 |
+| 	Ticket	 | 	船票編號	 |
+| 	Fare	 | 	票價	 |
+| 	Cabin	 | 	船艙號	 |
+| 	Embarked	 | 	登船地(C = Cherbourg, Q = Queenstown, S = Southampton)	 |
