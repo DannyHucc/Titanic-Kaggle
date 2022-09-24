@@ -117,7 +117,7 @@
 -----
 
 ### 十、Name(姓氏)資料處理：
-#### 使用.split()將名字分割為姓氏，新增 title 欄位並使用.map()依照姓氏的相關意思進行分類，將相同姓氏做資料合併。
+#### 使用.split()將名字分割為姓氏，新增 Title 欄位並使用.map()依照姓氏的相關意思進行分類，將相同姓氏做資料合併。
 
 ![](image/11.png)
 #### 姓氏的數量 - (圖11)
@@ -144,7 +144,7 @@
 | 	Dr.	 | 	Doctor,醫生/博士	 |
 | 	Rev.	 | 	Reverend,用於基督教的牧師	 |
 
-#### 分類：
+#### 分類方式：
 | 	分類	 | 	姓氏	 |
 | 	--------	 | 	--------	 |
 | 	Mr	 | 	Mr	 |
@@ -153,15 +153,38 @@
 | 	Mrs	 | 	Mme, Ms, Mrs	 |
 | 	Royalty	 | 	Don, the Countess, Dona, Lady,Sir	 |
 | 	Officer	 | 	Capt, Col, Major, Dr, Rev	 |
-| 	Parch	 | 	父母/小孩人數	 |
-| 	SibSp	 | 	兄弟姐妹/配偶人數	 |
-| 	Ticket	 | 	船票編號	 |
-| 	Fare	 | 	票價	 |
-| 	Cabin	 | 	船艙號	 |
-| 	Embarked	 | 	登船地(C = Cherbourg, Q = Queenstown, S = Southampton)	 |
 
 ![](image/12.png)
-#### 分類的姓氏數量 - (圖12)
+#### Title欄位的姓氏數量 - (圖12)
 
+-----
+
+### 十一、 Title欄位與Survived(生存率)的關係
+#### 使用sns.barplot繪製Title欄位的姓氏。
 ![](image/13.png)
-#### 繪製分類的姓氏 - (圖13)
+#### 繪製Title欄位的姓氏 - (圖13)
+
+-----
+
+### 十二、Parch(父母/小孩人數)和SibSp(兄弟姐妹/配偶人數)資料處理
+#### 新增familyNum欄位，將Parch(父母/小孩人數)和SibSp(兄弟姐妹/配偶人數)做資料合併。
+#### 使用sns.barplot繪製familyNum與Survived(生存率)的關係，可以看出家族規模為2,3,4時，生存率是最高的。
+
+![](image/14.png)
+#### 繪製familyNum與Survived(生存率)的關係 - (圖14)
+
+#### 新增 familySize 欄位，將家族規模生存率接近的資料分類：
+#### 家族規模 1,7 生存率接近分為一類，以數字0表示；
+#### 家族規模 2,3,4 生存率接近分為一類，以數字1表示；
+#### 家族規模 5,6 生存率接近分為一類，以數字2表示。
+
+-----
+
+### 十三、familySize欄位與Survived(生存率)的關係
+#### 使用sns.barplot繪製familySize與Survived(生存率)的關係，可以看出分類'0'的生存率最高。
+
+![](image/15.png)
+#### 繪製familySize與Survived(生存率)的關係 - (圖15)
+
+-----
+
