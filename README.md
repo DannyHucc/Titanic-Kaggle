@@ -188,3 +188,23 @@
 
 -----
 
+### 十四、 Age(年齡)缺失值處理
+#### 可以看出0~10歲和15~40歲這兩個年齡層Survived(生存率)較大，遇難時優先保護小孩子是普遍的價值觀；一般出遊的人年紀落在15~40歲的人數會相對較多，所以Survived(生存率)有集中於15~40歲的趨勢。
+
+![](image/16.png)
+#### 繪製 Survived(生存率) 與 Survived(生存率)的關係- (圖16)
+
+#### 將Age,Pclass,Title,TickCot,familyNum,Parch,SibSp 資料給值到變數 AgePre；使用get_dummies()，對變數AgePre進行類別變量轉換為標籤變量。
+#### 新增變數AgeCorrDf設為DataFrame的二維資料結構；使用corr()計算AgePre的相關係數求取並給值到變數AgeCorrDf，查看 Age欄位，可以看出Parch、SibSp、Pclass的相關係數較高(取值接近-1，表示反相關，類似反比例函數，取值接近1，表正相關
+
+![](image/17.png)
+#### 查看AgeCorrDf的 Age欄位- (圖17)
+
+#### 分別對Parch、SibSp、Pclass進行get_dummies()，然後給值到變數ParAge、SibAge、PclAge；將資料AgePre、ParAge、SibAge、PclAge 作合併到AgePre。
+
+![](image/18.png)
+#### 查看AgePre的欄位- (圖18)
+
+#### 拆分AgePre資料的Age欄位，分為Features和Label，Features將Age欄位刪除，Label只取Age欄位。
+#### 利用RF(RandomForestRegressor)建立模型，使用fit()進行資料預處理，使用score()進行評分；取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Features。
+#### 取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Feature，使用predict()預測Age，將預測 Age 填入到缺失值裡。
