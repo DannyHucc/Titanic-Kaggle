@@ -178,33 +178,86 @@
 #### 家族規模 2,3,4 生存率接近分為一類，以數字1表示；
 #### 家族規模 5,6 生存率接近分為一類，以數字2表示。
 
------
-
-### 十三、familySize欄位與Survived(生存率)的關係
-#### 使用sns.barplot繪製familySize與Survived(生存率)的關係，可以看出分類'0'的生存率最高。
+#### 使用sns.barplot繪製 familySize 與 Survived(生存率)的關係，可以看出家族規模為2,3,4時，生存率是最高的。
 
 ![](image/15.png)
-#### 繪製familySize與Survived(生存率)的關係 - (圖15)
+#### 繪製 familySize 與 Survived(生存率)的關係- (圖15)
+
+-----
+
+### 十三、TicketGroup欄位與Survived(生存率)的關係
+#### 使用sns.barplot繪製TicketGroup與Survived(生存率)的關係，可以看出分類'0'的生存率最高。
+
+![](image/16.png)
+#### 繪製TicketGroup與Survived(生存率)的關係 - (圖16)
 
 -----
 
 ### 十四、 Age(年齡)缺失值處理
 #### 可以看出0到10歲和15到40歲這兩個年齡層Survived(生存率)較大，遇難時優先保護小孩子是普遍的價值觀；一般出遊的人年紀落在15到40歲的人數會相對較多，所以Survived(生存率)有集中於15到40歲的趨勢。
 
-![](image/16.png)
-#### 繪製 Survived(生存率) 與 Survived(生存率)的關係- (圖16)
+![](image/17.png)
+#### 繪製Age(年齡)與Survived(生存率)的關係- (圖17)
+
+-----
 
 #### 將Age,Pclass,Title,TickCot,familyNum,Parch,SibSp 資料給值到變數 AgePre；使用get_dummies()，對變數AgePre進行類別變量轉換為標籤變量。
 #### 新增變數AgeCorrDf設為DataFrame的二維資料結構；使用corr()計算AgePre的相關係數求取並給值到變數AgeCorrDf，查看 Age欄位，可以看出Parch、SibSp、Pclass的相關係數較高(取值接近-1，表示反相關，類似反比例函數，取值接近1，表正相關
 
-![](image/17.png)
-#### 查看AgeCorrDf的 Age欄位- (圖17)
+![](image/18.png)
+#### 查看AgeCorrDf的 Age欄位- (圖18)
+
+-----
 
 #### 分別對Parch、SibSp、Pclass進行get_dummies()，然後給值到變數ParAge、SibAge、PclAge；將資料AgePre、ParAge、SibAge、PclAge 作合併到AgePre。
 
-![](image/18.png)
-#### 查看AgePre的欄位- (圖18)
+![](image/19.png)
+#### 查看AgePre的欄位- (圖19)
 
 #### 拆分AgePre資料的Age欄位，分為Features和Label，Features將Age欄位刪除，Label只取Age欄位。
 #### 利用RF(RandomForestRegressor)建立模型，使用fit()進行資料預處理，使用score()進行評分；取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Features。
 #### 取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Feature，使用predict()預測Age，將預測 Age 填入到缺失值裡。
+
+
+![](image/20.png)
+#### 查看AgePre的欄位- (圖20)
+
+-----
+
+## 十五、Survived資料處理
+#### 使用map()、lambda、split()、strip()對Name欄位的資料進行姓氏處理，新增Surname欄位，將處理好的資料給欄位Surname。
+#### 創建MaleDf變數，資料為家庭成員大於等於2且年齡大於12歲的男性。
+#### 創建FemChildDf變數，資料為家庭成員大於等於2而且為女性或年齡小於等於12歲的人。
+
+#### 使用groupby()，用MaleDf的Survived資料，對MaleDf的Surname資料進行分類並計算平均值，並存入MSurNamDf變數。
+#### 取出MSurNamDf生存率為1的姓氏，並存入MSurNamDict變數。
+
+#### 使用groupby()，用FemChildDf的Survived資料，對FemChildDf的Surname資料進行分類並計算平均值，並存入FCSurNamDf變數。
+#### 取出FCSurNamDf生存率為0的姓氏，並存入FCSurNamDict變數。
+
+#### 將資料集中Survived為空白值，且資料集中Surname為MSurNamDict，且性別為男性的進行填補和修正，性别改為女、Age改為5。
+#### 將資料集中Survived為空白值，且資料集中Surname為FCSurNamDict，且性別為女性及兒童的資料進行填補和修正，性别改為男、Age改為60。
+
+-----
+
+### 叁、Select Feature
+### 一、資料選擇：
+#### 新建變數fullSel，將full資料的Cabin,Name,Ticket,PassengerId,
+#### Surname,SurnameNum欄位刪除，並將值給變數fullSel。
+#### 新建變數corrDf，進行fullSel的相關係數求取，並將值給變數corrDf。
+#### 查看Survived欄位的相關性，類似反比例函數，取值接近-1，表示反相關，取值接近1，表正相關。
+
+#### 使用HeatMap()繪製Survived與其他Feature間相關性大小。
+#### 可以看出SibSp,Parch,familyNum,TickCot欄位相關性太高，所以刪除，並免過度擬合。
+
+### 二、建立訓練集、測試集：
+#### 使用one-hot Encoding，將類別變量轉換為標籤變量。
+#### 分別對fullSel、Pclass、TicketGroup、familySize進行get_dummies()，然後給值到變數fullSel、PclassDf、TickGroupDf、familySizeDf。
+#### 將資料fullSel、PclassDf、TickGroupDf、familySizeDf作合併到fullSel。
+
+#### 將fullSel的Survived為非空白值的資料取出，並給值到變數experData。
+#### 移除experData的Survived資料，當作訓練集的Features，並給值到變數experData_X。
+#### 使用experData的Survived資料，當作訓練集的Label，並給值到變數experData_y。
+
+#### 將fullSel的Survived是空白值的資料取出，並給值到變數perData。
+#### 移除preData的Survived資料，當作測試資料Features，並給值到變數perData_X。
