@@ -230,17 +230,31 @@
 #### 創建FemChildDf變數，資料為家庭成員大於等於2而且為女性或年齡小於等於12歲的人。
 
 #### 使用groupby()，用MaleDf的Survived資料，對MaleDf的Surname資料進行分類並計算平均值，並存入MSurNamDf變數。
+
+![](image/21.png)
+#### 查看MSurNamDf- (圖21)
+
 #### 取出MSurNamDf生存率為1的姓氏，並存入MSurNamDict變數。
 
+![](image/22.png)
+#### 查看MSurNamDict- (圖22)
+
 #### 使用groupby()，用FemChildDf的Survived資料，對FemChildDf的Surname資料進行分類並計算平均值，並存入FCSurNamDf變數。
+
+![](image/23.png)
+#### 查看FCSurNamDf- (圖23)
+
 #### 取出FCSurNamDf生存率為0的姓氏，並存入FCSurNamDict變數。
+
+![](image/24.png)
+#### 查看FCSurNamDict- (圖24)
 
 #### 將資料集中Survived為空白值，且資料集中Surname為MSurNamDict，且性別為男性的進行填補和修正，性别改為女、Age改為5。
 #### 將資料集中Survived為空白值，且資料集中Surname為FCSurNamDict，且性別為女性及兒童的資料進行填補和修正，性别改為男、Age改為60。
 
 -----
 
-### 叁、Select Feature
+## 叁、Select Feature
 ### 一、資料選擇：
 #### 新建變數fullSel，將full資料的Cabin,Name,Ticket,PassengerId,
 #### Surname,SurnameNum欄位刪除，並將值給變數fullSel。
