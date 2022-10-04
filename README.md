@@ -214,15 +214,15 @@
 #### 使用sns.barplot繪製TicketGroup與Survived(生存率)的關係，可以看出分類'0'的生存率最高。
 
 ![](image/16.png)
-#### 繪製TicketGroup與Survived(生存率)的關係  - (圖16)
+#### 繪製TicketGroup與Survived(生存率)的關係  - (圖20)
 
 -----
 
-### 十四、 Age(年齡)缺失值處理
+### 十五、 Age(年齡)缺失值處理
 #### 可以看出0到10歲和15到40歲這兩個年齡層Survived(生存率)較大，遇難時優先保護小孩子是普遍的價值觀；一般出遊的人年紀落在15到40歲的人數會相對較多，所以Survived(生存率)有集中於15到40歲的趨勢。
 
 ![](image/17.png)
-#### 繪製Age(年齡)與Survived(生存率)的關係 - (圖17)
+#### 繪製Age(年齡)與Survived(生存率)的關係 - (圖21)
 
 -----
 
@@ -230,14 +230,14 @@
 #### 新增變數AgeCorrDf設為DataFrame的二維資料結構；使用corr()計算AgePre的相關係數求取並給值到變數AgeCorrDf，查看 Age欄位，可以看出Parch、SibSp、Pclass的相關係數較高(取值接近-1，表示反相關，類似反比例函數，取值接近1，表正相關
 
 ![](image/18.png)
-#### 查看AgeCorrDf的 Age欄位 - (圖18)
+#### 查看AgeCorrDf的 Age欄位 - (圖22)
 
 -----
 
 #### 分別對Parch、SibSp、Pclass進行get_dummies()，然後給值到變數ParAge、SibAge、PclAge；將資料AgePre、ParAge、SibAge、PclAge 作合併到AgePre。
 
 ![](image/19.png)
-#### 查看AgePre的欄位 - (圖19)
+#### 查看AgePre的欄位 - (圖23)
 
 #### 拆分AgePre資料的Age欄位，分為Features和Label，Features將Age欄位刪除，Label只取Age欄位。
 #### 利用RF(RandomForestRegressor)建立模型，使用fit()進行資料預處理，使用score()進行評分；取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Features。
@@ -245,11 +245,11 @@
 
 
 ![](image/20.png)
-#### 查看AgePre的欄位 - (圖20)
+#### 查看AgePre的欄位 - (圖24)
 
 -----
 
-## 十五、Survived資料處理
+## 十六、Survived資料處理
 #### 使用map()、lambda、split()、strip()對Name欄位的資料進行姓氏處理，新增Surname欄位，將處理好的資料給欄位Surname。
 #### 創建MaleDf變數，資料為家庭成員大於等於2且年齡大於12歲的男性。
 #### 創建FemChildDf變數，資料為家庭成員大於等於2而且為女性或年齡小於等於12歲的人。
@@ -257,22 +257,22 @@
 #### 使用groupby()，用MaleDf的Survived資料，對MaleDf的Surname資料進行分類並計算平均值，並存入MSurNamDf變數。
 
 ![](image/21.png)
-#### 查看MSurNamDf - (圖21)
+#### 查看MSurNamDf - (圖25)
 
 #### 取出MSurNamDf生存率為1的姓氏，並存入MSurNamDict變數。
 
 ![](image/22.png)
-#### 查看MSurNamDict - (圖22)
+#### 查看MSurNamDict - (圖26)
 
 #### 使用groupby()，用FemChildDf的Survived資料，對FemChildDf的Surname資料進行分類並計算平均值，並存入FCSurNamDf變數。
 
 ![](image/23.png)
-#### 查看FCSurNamDf - (圖23)
+#### 查看FCSurNamDf - (圖27)
 
 #### 取出FCSurNamDf生存率為0的姓氏，並存入FCSurNamDict變數。
 
 ![](image/24.png)
-#### 查看FCSurNamDict - (圖24)
+#### 查看FCSurNamDict - (圖28)
 
 #### 將資料集中Survived為空白值，且資料集中Surname為MSurNamDict，且性別為男性的進行填補和修正，性别改為女、Age改為5。
 #### 將資料集中Survived為空白值，且資料集中Surname為FCSurNamDict，且性別為女性及兒童的資料進行填補和修正，性别改為男、Age改為60。
@@ -287,13 +287,13 @@
 #### 查看Survived欄位的相關性，類似反比例函數，取值接近-1，表示反相關，取值接近1，表正相關。
 
 ![](image/25.png)
-#### 查看Survived欄位的相關性 - (圖25)
+#### 查看Survived欄位的相關性 - (圖29)
 
 #### 使用HeatMap()繪製Survived與其他Feature間相關性大小。
 #### 可以看出SibSp,Parch,familyNum,TickCot欄位相關性太高，所以刪除，並免過度擬合。
 
 ![](image/26.png)
-#### 繪製Survived與其他Feature間相關性大小 - (圖26)
+#### 繪製Survived與其他Feature間相關性大小 - (圖30)
 
 ### 二、建立訓練集、測試集：
 #### 使用one-hot Encoding，將類別變量轉換為標籤變量。
@@ -303,15 +303,15 @@
 #### 移除experData的Survived資料，當作訓練集的Features，並給值到變數experData_X。
 
 ![](image/27.png)
-#### 查看experData_X的欄位 - (圖27)
+#### 查看experData_X的欄位 - (圖31)
 
 #### 使用experData的Survived資料，當作訓練集的Label，並給值到變數experData_y。
 
 ![](image/28.png)
-#### 查看experData_y - (圖28)
+#### 查看experData_y - (圖32)
 
 #### 將fullSel的Survived是空白值的資料取出，並給值到變數perData。
 #### 移除preData的Survived資料，當作測試資料Features，並給值到變數perData_X。
 
 ![](image/29.png)
-#### 查看perData_X的欄位 - (圖29)
+#### 查看perData_X的欄位 - (圖33)
