@@ -213,7 +213,7 @@
 ### 十四、TicketGroup欄位與Survived(生存率)的關係
 #### 使用sns.barplot繪製TicketGroup與Survived(生存率)的關係，可以看出分類'0'的生存率最高。
 
-![](image/16.png)
+![](image/20.png)
 #### 繪製TicketGroup與Survived(生存率)的關係  - (圖20)
 
 -----
@@ -221,22 +221,18 @@
 ### 十五、 Age(年齡)缺失值處理
 #### 可以看出0到10歲和15到40歲這兩個年齡層Survived(生存率)較大，遇難時優先保護小孩子是普遍的價值觀；一般出遊的人年紀落在15到40歲的人數會相對較多，所以Survived(生存率)有集中於15到40歲的趨勢。
 
-![](image/17.png)
+![](image/21.png)
 #### 繪製Age(年齡)與Survived(生存率)的關係 - (圖21)
-
------
 
 #### 將Age,Pclass,Title,TickCot,familyNum,Parch,SibSp 資料給值到變數 AgePre；使用get_dummies()，對變數AgePre進行類別變量轉換為標籤變量。
 #### 新增變數AgeCorrDf設為DataFrame的二維資料結構；使用corr()計算AgePre的相關係數求取並給值到變數AgeCorrDf，查看 Age欄位，可以看出Parch、SibSp、Pclass的相關係數較高(取值接近-1，表示反相關，類似反比例函數，取值接近1，表正相關
 
-![](image/18.png)
+![](image/22.png)
 #### 查看AgeCorrDf的 Age欄位 - (圖22)
-
------
 
 #### 分別對Parch、SibSp、Pclass進行get_dummies()，然後給值到變數ParAge、SibAge、PclAge；將資料AgePre、ParAge、SibAge、PclAge 作合併到AgePre。
 
-![](image/19.png)
+![](image/23.png)
 #### 查看AgePre的欄位 - (圖23)
 
 #### 拆分AgePre資料的Age欄位，分為Features和Label，Features將Age欄位刪除，Label只取Age欄位。
@@ -244,7 +240,7 @@
 #### 取出AgePre資料age為null的資料，使用drop()將age欄位刪除，製作生成Prediction使用的Feature，使用predict()預測Age，將預測 Age 填入到缺失值裡。
 
 
-![](image/20.png)
+![](image/24.png)
 #### 查看AgePre的欄位 - (圖24)
 
 -----
@@ -256,22 +252,22 @@
 
 #### 使用groupby()，用MaleDf的Survived資料，對MaleDf的Surname資料進行分類並計算平均值，並存入MSurNamDf變數。
 
-![](image/21.png)
+![](image/25.png)
 #### 查看MSurNamDf - (圖25)
 
 #### 取出MSurNamDf生存率為1的姓氏，並存入MSurNamDict變數。
 
-![](image/22.png)
+![](image/26.png)
 #### 查看MSurNamDict - (圖26)
 
 #### 使用groupby()，用FemChildDf的Survived資料，對FemChildDf的Surname資料進行分類並計算平均值，並存入FCSurNamDf變數。
 
-![](image/23.png)
+![](image/27.png)
 #### 查看FCSurNamDf - (圖27)
 
 #### 取出FCSurNamDf生存率為0的姓氏，並存入FCSurNamDict變數。
 
-![](image/24.png)
+![](image/28.png)
 #### 查看FCSurNamDict - (圖28)
 
 #### 將資料集中Survived為空白值，且資料集中Surname為MSurNamDict，且性別為男性的進行填補和修正，性别改為女、Age改為5。
@@ -286,13 +282,13 @@
 #### 新建變數corrDf，進行fullSel的相關係數求取，並將值給變數corrDf。
 #### 查看Survived欄位的相關性，類似反比例函數，取值接近-1，表示反相關，取值接近1，表正相關。
 
-![](image/25.png)
+![](image/29.png)
 #### 查看Survived欄位的相關性 - (圖29)
 
 #### 使用HeatMap()繪製Survived與其他Feature間相關性大小。
 #### 可以看出SibSp,Parch,familyNum,TickCot欄位相關性太高，所以刪除，並免過度擬合。
 
-![](image/26.png)
+![](image/30.png)
 #### 繪製Survived與其他Feature間相關性大小 - (圖30)
 
 ### 二、建立訓練集、測試集：
@@ -302,16 +298,44 @@
 #### 將fullSel的Survived為非空白值的資料取出，並給值到變數experData。
 #### 移除experData的Survived資料，當作訓練集的Features，並給值到變數experData_X。
 
-![](image/27.png)
+![](image/31.png)
 #### 查看experData_X的欄位 - (圖31)
 
 #### 使用experData的Survived資料，當作訓練集的Label，並給值到變數experData_y。
 
-![](image/28.png)
+![](image/32.png)
 #### 查看experData_y - (圖32)
 
 #### 將fullSel的Survived是空白值的資料取出，並給值到變數perData。
 #### 移除preData的Survived資料，當作測試資料Features，並給值到變數perData_X。
 
-![](image/29.png)
+![](image/33.png)
 #### 查看perData_X的欄位 - (圖33)
+
+-----
+
+肆、Modeling
+#### 匯入演算法 SVC()、DecisionTreeClassifier()、RandomForestClassifier()、ExtraTreesClassifier()、GradientBoostingClassifier()、KNeighborsClassifier()、LogisticRegression()、LinearDiscriminantAnalysis()為了進行演算法的效果選擇。
+#### 建立陣列classifiers，將所有演算法合併，進行每個演算法計算。
+#### 新增名稱為cvResDf的DataFrame，來紀錄和查看每個演算法的結果。
+#### 使用sns.barplot繪製各演算法的評分結果，可以看到GradientBoostingClassifier結果最好。
+
+![](image/34.png)
+#### 繪製各演算法的評分結果 - (圖34)
+
+#### 使用演算法 GradientBoostingClassifier正式進行訓練模型，使用fit()訓練資料experData_X,experData_y，創建變數GBCpreData_y,使用predict()預測資料preData_X,並將值給變數GBCpreData_y。
+
+#### 創建變數GBCpreData_y,使用predict()預測資料preData_X,並將值給變數GBCpreData_y，將變數GBCpreData_y資料類型轉換為 int 格式。
+
+-----
+
+### 伍、Evaluation Results
+#### 使用sklearn.metrics進行評分，讀取評估用資料。
+#### 使用confusion_matrix()計算混淆矩陣，使用accuracy_score()對分類的準確性評分，顯示主要分類指標的文本報告,可以看到各評分都有在85%以上。
+
+![](image/35.png)
+#### 各指標評分 - (圖35)
+
+-----
+
+### 陆、結尾
