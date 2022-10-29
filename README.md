@@ -314,7 +314,7 @@
 
 -----
 
-肆、Modeling
+## 肆、Modeling
 #### 匯入演算法 SVC()、DecisionTreeClassifier()、RandomForestClassifier()、ExtraTreesClassifier()、GradientBoostingClassifier()、KNeighborsClassifier()、LogisticRegression()、LinearDiscriminantAnalysis()為了進行演算法的效果選擇。
 #### 建立陣列classifiers，將所有演算法合併，進行每個演算法計算。
 #### 新增名稱為cvResDf的DataFrame，來紀錄和查看每個演算法的結果。
